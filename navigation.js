@@ -8,6 +8,11 @@ document.querySelectorAll('.site-nav').forEach((nav) => {
     button.hidden = !mobile.matches;
     closeMenu();
   }
+  document.addEventListener("click", (event) => {
+  if (mobile.matches && !nav.contains(event.target)) {
+    closeMenu();
+  }
+  });
   button.addEventListener('click', () => {
     button.setAttribute('aria-expanded', String(button.getAttribute('aria-expanded') !== 'true'));
   });
