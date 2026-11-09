@@ -1123,3 +1123,24 @@ section[id], h1[id], div[id] {
   top: 0;
   z-index: 1000;
 }
+@media (max-width: 760px) {
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    max-height: 100dvh;
+    overflow-y: auto;
+  }
+
+  body {
+    padding-top: 69px;
+  }
+}
+
+@media (max-width: 620px) {
+  body {
+    padding-top: 65px;
+  }
+}
