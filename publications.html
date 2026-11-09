@@ -1,345 +1,34 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Publications | Ivan Guo</title>
-    <style>
-      :root {
-        color-scheme: light;
-        --paper: #fbf8f1;
-        --ink: #293330;
-        --muted: #59635d;
-        --rust: #a6482e;
-        --teal: #28655f;
-        --plum: #715679;
-        --line: #dddfd3;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        background: var(--paper);
-        color: var(--ink);
-        font: 18px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-      }
-
-      a {
-        color: var(--teal);
-        text-underline-offset: 4px;
-        overflow-wrap: anywhere;
-      }
-
-      a:hover {
-        color: var(--rust);
-      }
-
-      a:focus-visible {
-        outline: 3px solid var(--rust);
-        outline-offset: 4px;
-      }
-
-      .page {
-        max-width: 1160px;
-        padding: 34px 36px 28px;
-        margin: auto;
-      }
-
-      h1, h2 {
-        font-family: Georgia,"Times New Roman",serif;
-        font-weight: 400;
-        letter-spacing: -.025em;
-      }
-
-      h1 {
-        font-size: 51px;
-        line-height: 1.15;
-        color: var(--rust);
-        margin: 0 0 14px;
-      }
-
-      h2 {
-        font-size: 31px;
-        line-height: 1.25;
-        margin: 0 0 18px;
-      }
-
-      h3 {
-        font-size: 20px;
-        line-height: 1.4;
-        font-weight: 600;
-        margin: 0 0 12px;
-      }
-
-      p {
-        margin: 0 0 17px;
-      }
-
-      .eyebrow {
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: .13em;
-        text-transform: uppercase;
-        color: var(--teal);
-        margin: 0 0 9px;
-      }
-
-      .page-heading {
-        position: relative;
-        padding-right: 100px;
-        margin: 0 0 28px;
-      }
-
-      .page-heading .intro {
-        max-width: 860px;
-        font-size: 18px;
-        line-height: 1.7;
-        margin-bottom: 0;
-      }
-
-      .flourish {
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 85px;
-        height: 86px;
-        pointer-events: none;
-      }
-
-      .footer {
-        margin-top: 30px;
-        padding-top: 16px;
-        border-top: 1px solid var(--line);
-        font-size: 13px;
-        color: var(--muted);
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-
-      .jump {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px 22px;
-        margin: 20px 0 26px;
-      }
-
-      .jump a {
-        font-size: 14px;
-        min-height: 30px;
-        display: inline-flex;
-        align-items: center;
-        color: var(--plum);
-      }
-
-      .pub-group {
-        margin: 0 0 29px;
-      }
-
-      .pub-group h2 {
-        font: 600 20px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-        color: var(--teal);
-        letter-spacing: 0;
-        margin: 0;
-        padding: 0 0 10px;
-        border-bottom: 1px solid var(--line);
-      }
-
-      #chapters h2 {
-        color: var(--plum);
-      }
-
-      #preprints h2 {
-        color: var(--rust);
-      }
-
-      .papers {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        display: grid;
-        grid-template-columns: minmax(0,1fr) minmax(0,1fr);
-        column-gap: 32px;
-      }
-
-      .paper {
-        display: grid;
-        grid-template-columns: 38px minmax(0,1fr);
-        gap: 11px;
-        padding: 13px 0 10px;
-        border-bottom: 1px solid var(--line);
-        align-content: start;
-      }
-
-      .year {
-        font-size: 13px;
-        color: var(--rust);
-        line-height: 1.6;
-        font-variant-numeric: tabular-nums;
-      }
-
-      .paper h3 {
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 1.4;
-        margin: 0 0 5px;
-      }
-
-      .paper h3 a {
-        text-decoration: none;
-        color: var(--ink);
-      }
-
-      .paper h3 a:hover {
-        text-decoration: underline;
-        color: var(--rust);
-      }
-
-      .paper .metadata {
-        font-size: 13px;
-        line-height: 1.5;
-        color: var(--muted);
-        margin: 0;
-      }
-
-      .paper .metadata em {
-        font-style: normal;
-      }
-
-      .paper-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0 13px;
-        margin-top: 3px;
-      }
-
-      .paper-links a {
-        font-size: 12px;
-        min-height: 29px;
-        display: inline-flex;
-        align-items: center;
-      }
-
-      section[id], h1[id], div[id] {
-        scroll-margin-top: 18px;
-      }
-
-      @media(max-width:900px) {
-        .page {
-          padding: 28px;
-        }
-
-        .papers {
-          grid-template-columns: minmax(0,1fr);
-        }
-
-      }
-
-      @media(max-width:620px) {
-        body {
-          font-size: 17px;
-        }
-
-        .page {
-          padding: 25px 20px;
-        }
-
-        .page-heading {
-          padding-right: 0;
-          margin-bottom: 24px;
-        }
-
-        .page-heading .flourish {
-          display: none;
-        }
-
-        .page-heading .intro {
-          font-size: 17px;
-        }
-
-        h1 {
-          font-size: 43px;
-        }
-
-        h2 {
-          font-size: 29px;
-        }
-
-        .paper {
-          grid-template-columns: 36px 1fr;
-          gap: 10px;
-        }
-
-        .paper h3 {
-          font-size: 15.5px;
-        }
-
-        .paper .metadata {
-          font-size: 13px;
-        }
-
-        .paper-links a {
-          min-height: 36px;
-          font-size: 12px;
-        }
-
-        .footer {
-          font-size: 12px;
-        }
-
-        .jump {
-          gap: 5px 16px;
-        }
-
-        .jump a {
-          font-size: 13px;
-          min-height: 36px;
-        }
-
-      }
-
-      @media(prefers-reduced-motion:reduce) {
-        html {
-          scroll-behavior: auto;
-        }
-
-      }
-
-      @media print {
-        .jump, .flourish {
-          display: none;
-        }
-
-        .page {
-          padding: 0;
-          max-width: none;
-        }
-
-        body {
-          background: white;
-          font-size: 12pt;
-        }
-
-        .papers {
-          grid-template-columns: 1fr;
-        }
-
-        .paper {
-          break-inside: avoid;
-        }
-
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <script src="navigation.js" defer></script>
   </head>
-  <body>
+  <body class="page-publications">
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Main navigation">
+        <a class="site-brand" href="index.html">Ivan Guo</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" hidden="hidden">Menu</button>
+        <ul class="site-menu" id="site-menu">
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li>
+            <a href="publications.html" aria-current="page">Publications</a>
+          </li>
+          <li>
+            <a href="talks.html">Research talks</a>
+          </li>
+          <li>
+            <a href="olympiad.html">Olympiad &amp; problem solving</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
     <main>
       <div class="page">
         <header class="page-heading">
@@ -347,7 +36,7 @@
           <h1 id="publications-title">Publications</h1>
           <p class="intro">I sometimes write about mathematics. <a href="https://scholar.google.com/citations?hl=en&amp;user=IPDgZisAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a>
           </p>
-          <svg class="flourish" viewbox="0 0 110 110" fill="none" aria-hidden="true">
+          <svg class="flourish" viewBox="0 0 110 110" fill="none" aria-hidden="true">
             <circle cx="75" cy="26" r="11" fill="#d9c3df"></circle>
             <path d="M16 79C-5 55 82 10 89 39C97 73 7 103 18 66C25 43 102 39 97 68" stroke="#a6482e" stroke-width="1.7"></path>
             <circle cx="31" cy="18" r="4" fill="#628c78"></circle>
