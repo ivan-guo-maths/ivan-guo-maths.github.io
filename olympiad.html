@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Olympiad | Ivan Guo</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #fbf8f1;
+        --ink: #293330;
+        --muted: #59635d;
+        --rust: #a6482e;
+        --teal: #28655f;
+        --plum: #715679;
+        --line: #dddfd3;
+        --sage: #e7eee5;
+        --lilac: #efe8f2;
+        --peach: #f6e8dd;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font: 18px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      }
+
+      a {
+        color: var(--teal);
+        text-underline-offset: 4px;
+        overflow-wrap: anywhere;
+      }
+
+      a:hover {
+        color: var(--rust);
+      }
+
+      a:focus-visible {
+        outline: 3px solid var(--rust);
+        outline-offset: 4px;
+      }
+
+      .page {
+        max-width: 1160px;
+        padding: 34px 36px 28px;
+        margin: auto;
+      }
+
+      h1, h2 {
+        font-family: Georgia,"Times New Roman",serif;
+        font-weight: 400;
+        letter-spacing: -.025em;
+      }
+
+      h1 {
+        font-size: 51px;
+        line-height: 1.15;
+        color: var(--rust);
+        margin: 0 0 14px;
+      }
+
+      h2 {
+        font-size: 31px;
+        line-height: 1.25;
+        margin: 0 0 18px;
+      }
+
+      h3 {
+        font-size: 20px;
+        line-height: 1.4;
+        font-weight: 600;
+        margin: 0 0 12px;
+      }
+
+      p {
+        margin: 0 0 17px;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin: 0 0 9px;
+      }
+
+      .page-heading {
+        position: relative;
+        padding-right: 100px;
+        margin: 0 0 28px;
+      }
+
+      .page-heading .intro {
+        max-width: 860px;
+        font-size: 18px;
+        line-height: 1.7;
+        margin-bottom: 0;
+      }
+
+      .flourish {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 85px;
+        height: 86px;
+        pointer-events: none;
+      }
+
+      .footer {
+        margin-top: 30px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+        font-size: 13px;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .split-section {
+        display: grid;
+        grid-template-columns: 235px minmax(0,1fr);
+        gap: 34px;
+        padding: 31px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .split-section h2 {
+        font-size: 28px;
+      }
+
+      .split-section p {
+        font-size: 17px;
+        line-height: 1.75;
+      }
+
+      .link-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px 20px;
+        margin: 17px 0 0;
+      }
+
+      .link-row a {
+        font-size: 14px;
+        min-height: 33px;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .medals {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 18px 0;
+      }
+
+      .medal {
+        padding: 5px 10px;
+        background: #f2e6bd;
+        color: #725013;
+        border-radius: 3px;
+        font-size: 14px;
+      }
+
+      .medal.bronze {
+        background: var(--peach);
+        color: #8b4931;
+      }
+
+      section[id], h1[id], div[id] {
+        scroll-margin-top: 18px;
+      }
+
+      .archive {
+        margin: 17px 0 21px;
+      }
+
+      .archive-row {
+        display: grid;
+        grid-template-columns: 53px minmax(0,1fr);
+        gap: 12px;
+        align-items: start;
+        padding: 7px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .archive-year {
+        font-size: 14px;
+        color: var(--rust);
+        padding-top: 6px;
+      }
+
+      .archive-numbers {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .archive-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 39px;
+        min-height: 33px;
+        padding: 3px 8px;
+        border-radius: 3px;
+        background: var(--sage);
+        font-size: 14px;
+        text-decoration: none;
+      }
+
+      .archive-link:hover {
+        background: var(--peach);
+        text-decoration: underline;
+      }
+
+      .newsletter-archive .archive-link {
+        background: var(--lilac);
+        color: var(--plum);
+      }
+
+      .archive-note {
+        font-size: 13px!important;
+        line-height: 1.65!important;
+        color: var(--muted);
+      }
+
+      @media(max-width:900px) {
+        .page {
+          padding: 28px;
+        }
+
+        .split-section {
+          grid-template-columns: 195px minmax(0,1fr);
+          gap: 25px;
+        }
+
+      }
+
+      @media(max-width:620px) {
+        body {
+          font-size: 17px;
+        }
+
+        .page {
+          padding: 25px 20px;
+        }
+
+        .page-heading {
+          padding-right: 0;
+          margin-bottom: 24px;
+        }
+
+        .page-heading .flourish {
+          display: none;
+        }
+
+        .page-heading .intro {
+          font-size: 17px;
+        }
+
+        h1 {
+          font-size: 43px;
+        }
+
+        h2 {
+          font-size: 29px;
+        }
+
+        .split-section {
+          grid-template-columns: 1fr;
+          gap: 4px;
+          padding: 26px 0;
+        }
+
+        .split-section h2 {
+          font-size: 27px;
+          margin-bottom: 13px;
+        }
+
+        .split-section p {
+          font-size: 16px;
+          line-height: 1.75;
+        }
+
+        .footer {
+          font-size: 12px;
+        }
+
+        .archive-row {
+          grid-template-columns: 45px minmax(0,1fr);
+          gap: 9px;
+        }
+
+        .archive-link {
+          min-width: 39px;
+          min-height: 39px;
+        }
+
+        .archive-year {
+          font-size: 13px;
+          padding-top: 9px;
+        }
+
+      }
+
+      @media(prefers-reduced-motion:reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+      }
+
+      @media print {
+        .flourish {
+          display: none;
+        }
+
+        .page {
+          padding: 0;
+          max-width: none;
+        }
+
+        body {
+          background: white;
+          font-size: 12pt;
+        }
+
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="page olympiad">
+        <header class="page-heading">
+          <p class="eyebrow">Ivan Guo · Mathematics</p>
+          <h1 id="olympiad-title">Olympiad &amp; problem solving</h1>
+          <p class="intro">I sometimes even do mathematics for fun.</p>
+          <svg class="flourish" viewBox="0 0 110 110" fill="none" aria-hidden="true">
+            <circle cx="75" cy="26" r="11" fill="#d9c3df"></circle>
+            <path d="M16 79C-5 55 82 10 89 39C97 73 7 103 18 66C25 43 102 39 97 68" stroke="#a6482e" stroke-width="1.7"></path>
+            <circle cx="31" cy="18" r="4" fill="#628c78"></circle>
+          </svg>
+        </header>
+        <section class="split-section" aria-labelledby="imo-work-title">
+          <h2 id="imo-work-title">International Mathematical Olympiad</h2>
+          <div>
+            <p>I served as a member of the <strong>Problem Selection Committee (PSC)</strong> and as a <strong>Coordinator</strong> for the International Mathematical Olympiads (IMOs) from 2023 to 2026. I was <strong>Chair of the PSC</strong> and <strong>Chief Coordinator</strong> for IMO 2025 in Australia.</p>
+            <p>The PSC selects, vets and refines problems from international submissions to produce the annual IMO Shortlist. Coordinators work with team leaders to assess contestants’ solutions and agree on scores, ensuring consistent and fair marking.</p>
+            <p>I was the <b>Deputy Leader</b> of the Australian IMO team from 2009 to 2013 and served as <b>Team Leader</b> in 2011.</p>
+            <p>As a student, I represented Australia at IMO 2003 (Japan) and 2004 (Greece), achieving a <b>Bronze Medal</b> in 2003 and a <b>Gold Medal</b> in 2004.</p>
+            <div class="medals">
+              <span class="medal">IMO gold · 2004</span>
+              <span class="medal bronze">IMO bronze · 2003</span>
+            </div>
+            <div class="link-row">
+              <a href="https://www.imo-official.org/" target="_blank" rel="noopener noreferrer">IMO official website ↗</a>
+              <a href="https://imo2025.au/" target="_blank" rel="noopener noreferrer">IMO 2025 Australia ↗</a>
+              <a href="https://www.monash.edu/science/news-events/news/2025/monash-mathematicians-lead-the-world-at-the-2025-international-mathematical-olympiad" target="_blank" rel="noopener noreferrer">Monash at IMO 2025 ↗</a>
+            </div>
+          </div>
+        </section>
+        <section class="split-section" aria-labelledby="amoc-work-title">
+          <h2 id="amoc-work-title">Australian Olympiad mathematics</h2>
+          <div>
+            <p>I have been a member of the <b>Australian Mathematical Olympiad Committee (AMOC)</b> since 2008.</p>
+            <p>Since 2020, I have been <strong>Chair of the AMOC Senior Problems Committee (SPC)</strong>, having been a member of the SPC since 2007. The committee sets the Australian Mathematical Olympiad (AMO) Summer, Winter and Final rounds, and prepares problem proposals for the <a href="https://www.imo-official.org/" target="_blank" rel="noopener noreferrer">IMO</a>, <a href="https://www.egmo.org/" target="_blank" rel="noopener noreferrer">European Girls’ Mathematical Olympiad (EGMO)</a> and <a href="https://apmo-official.org/" target="_blank" rel="noopener noreferrer">Asian Pacific Mathematics Olympiad (APMO)</a>.</p>
+            <p>For many years I have taught at <strong>Olympiad camps</strong>, including the AMOC Schools of Excellence and IMO Selection Schools, and mentored students on the Australian IMO Team.</p>
+            <p>I received the <a href="https://amt.edu.au/2018-bh-neumann-award-recipients" target="_blank" rel="noopener noreferrer">Australian Maths Trust’s BH Neumann Award in 2018</a> for contributions to mathematics enrichment.</p>
+            <div class="link-row">
+              <a href="https://amt.edu.au/" target="_blank" rel="noopener noreferrer">Australian Maths Trust ↗</a>
+              <a href="https://amt.edu.au/committees" target="_blank" rel="noopener noreferrer">AMOC &amp; committees ↗</a>
+              <a href="https://amt.edu.au/amo" target="_blank" rel="noopener noreferrer">Australian Mathematical Olympiad ↗</a>
+              <a href="https://amt.edu.au/olympiad-programs" target="_blank" rel="noopener noreferrer">Olympiad programs ↗</a>
+            </div>
+          </div>
+        </section>
+        <section class="split-section" aria-labelledby="smmc-work-title">
+          <h2 id="smmc-work-title">Simon Marais Mathematics Competition</h2>
+          <div>
+            <p>I have been involved in the <a href="https://www.simonmarais.org/" target="_blank" rel="noopener noreferrer">Simon Marais Mathematics Competition</a>, an international undergraduate mathematics competition, since 2018. I was on the <strong>Organising Committee</strong> from 2018 to 2021 and the <strong>Problems Committee</strong> since 2022.</p>
+            <div class="link-row">
+              <a href="https://www.simonmarais.org/" target="_blank" rel="noopener noreferrer">Competition website ↗</a>
+              <a href="https://www.simonmarais.org/aboutus.html" target="_blank" rel="noopener noreferrer">Committees ↗</a>
+            </div>
+          </div>
+        </section>
+        <section class="split-section" id="puzzle-corners" aria-labelledby="puzzle-work-title">
+          <h2 id="puzzle-work-title">Puzzle corners &amp; writing</h2>
+          <div>
+            <h3>Australian Mathematical Society Gazette</h3>
+            <p>I wrote <em>Puzzle Corner</em>
+              <strong>16–45</strong>, from 2010 to 2015.</p>
+            <div class="archive">
+              <div class="archive-row">
+                <span class="archive-year">2010</span>
+                <div class="archive-numbers">
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Mar10-371.pdf#page=8" title="Puzzle Corner 16 · 2010 · PDF" aria-label="Puzzle Corner 16 · 2010 · PDF" target="_blank" rel="noopener noreferrer">16</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/May10-372.pdf#page=11" title="Puzzle Corner 17 · 2010 · PDF" aria-label="Puzzle Corner 17 · 2010 · PDF" target="_blank" rel="noopener noreferrer">17</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Jul10-373.pdf#page=11" title="Puzzle Corner 18 · 2010 · PDF" aria-label="Puzzle Corner 18 · 2010 · PDF" target="_blank" rel="noopener noreferrer">18</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Sep10-37-4.pdf#page=14" title="Puzzle Corner 19 · 2010 · PDF" aria-label="Puzzle Corner 19 · 2010 · PDF" target="_blank" rel="noopener noreferrer">19</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Nov10-375.pdf#page=16" title="Puzzle Corner 20 · 2010 · PDF" aria-label="Puzzle Corner 20 · 2010 · PDF" target="_blank" rel="noopener noreferrer">20</a>
+                </div>
+              </div>
+              <div class="archive-row">
+                <span class="archive-year">2011</span>
+                <div class="archive-numbers">
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Mar11-381.pdf#page=19" title="Puzzle Corner 21 · 2011 · PDF" aria-label="Puzzle Corner 21 · 2011 · PDF" target="_blank" rel="noopener noreferrer">21</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/May11-382.pdf#page=15" title="Puzzle Corner 22 · 2011 · PDF" aria-label="Puzzle Corner 22 · 2011 · PDF" target="_blank" rel="noopener noreferrer">22</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Jul11-383.pdf#page=15" title="Puzzle Corner 23 · 2011 · PDF" aria-label="Puzzle Corner 23 · 2011 · PDF" target="_blank" rel="noopener noreferrer">23</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Sep11-384.pdf#page=12" title="Puzzle Corner 24 · 2011 · PDF" aria-label="Puzzle Corner 24 · 2011 · PDF" target="_blank" rel="noopener noreferrer">24</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Nov11-385.pdf#page=19" title="Puzzle Corner 25 · 2011 · PDF" aria-label="Puzzle Corner 25 · 2011 · PDF" target="_blank" rel="noopener noreferrer">25</a>
+                </div>
+              </div>
+              <div class="archive-row">
+                <span class="archive-year">2012</span>
+                <div class="archive-numbers">
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Mar12-391.pdf#page=16" title="Puzzle Corner 26 · 2012 · PDF" aria-label="Puzzle Corner 26 · 2012 · PDF" target="_blank" rel="noopener noreferrer">26</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/May12-392.pdf#page=7" title="Puzzle Corner 27 · 2012 · PDF" aria-label="Puzzle Corner 27 · 2012 · PDF" target="_blank" rel="noopener noreferrer">27</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Jul12-393.pdf#page=7" title="Puzzle Corner 28 · 2012 · PDF" aria-label="Puzzle Corner 28 · 2012 · PDF" target="_blank" rel="noopener noreferrer">28</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Sep12-394.pdf#page=8" title="Puzzle Corner 29 · 2012 · PDF" aria-label="Puzzle Corner 29 · 2012 · PDF" target="_blank" rel="noopener noreferrer">29</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Nov12-395.pdf#page=7" title="Puzzle Corner 30 · 2012 · PDF" aria-label="Puzzle Corner 30 · 2012 · PDF" target="_blank" rel="noopener noreferrer">30</a>
+                </div>
+              </div>
+              <div class="archive-row">
+                <span class="archive-year">2013</span>
+                <div class="archive-numbers">
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Mar13-401.pdf#page=8" title="Puzzle Corner 31 · 2013 · PDF" aria-label="Puzzle Corner 31 · 2013 · PDF" target="_blank" rel="noopener noreferrer">31</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/May13-402.pdf#page=7" title="Puzzle Corner 32 · 2013 · PDF" aria-label="Puzzle Corner 32 · 2013 · PDF" target="_blank" rel="noopener noreferrer">32</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Jul13-403.pdf#page=7" title="Puzzle Corner 33 · 2013 · PDF" aria-label="Puzzle Corner 33 · 2013 · PDF" target="_blank" rel="noopener noreferrer">33</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Sep13-404.pdf#page=7" title="Puzzle Corner 34 · 2013 · PDF" aria-label="Puzzle Corner 34 · 2013 · PDF" target="_blank" rel="noopener noreferrer">34</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Nov13-405.pdf#page=8" title="Puzzle Corner 35 · 2013 · PDF" aria-label="Puzzle Corner 35 · 2013 · PDF" target="_blank" rel="noopener noreferrer">35</a>
+                </div>
+              </div>
+              <div class="archive-row">
+                <span class="archive-year">2014</span>
+                <div class="archive-numbers">
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Mar14-411.pdf#page=5" title="Puzzle Corner 36 · 2014 · PDF" aria-label="Puzzle Corner 36 · 2014 · PDF" target="_blank" rel="noopener noreferrer">36</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/May14-412.pdf#page=8" title="Puzzle Corner 37 · 2014 · PDF" aria-label="Puzzle Corner 37 · 2014 · PDF" target="_blank" rel="noopener noreferrer">37</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Jul14-413.pdf#page=8" title="Puzzle Corner 38 · 2014 · PDF" aria-label="Puzzle Corner 38 · 2014 · PDF" target="_blank" rel="noopener noreferrer">38</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Sep14-414.pdf#page=8" title="Puzzle Corner 39 · 2014 · PDF" aria-label="Puzzle Corner 39 · 2014 · PDF" target="_blank" rel="noopener noreferrer">39</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Nov14-415.pdf#page=10" title="Puzzle Corner 40 · 2014 · PDF" aria-label="Puzzle Corner 40 · 2014 · PDF" target="_blank" rel="noopener noreferrer">40</a>
+                </div>
+              </div>
+              <div class="archive-row">
+                <span class="archive-year">2015</span>
+                <div class="archive-numbers">
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Mar15-421.pdf#page=9" title="Puzzle Corner 41 · 2015 · PDF" aria-label="Puzzle Corner 41 · 2015 · PDF" target="_blank" rel="noopener noreferrer">41</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/May15-422.pdf#page=8" title="Puzzle Corner 42 · 2015 · PDF" aria-label="Puzzle Corner 42 · 2015 · PDF" target="_blank" rel="noopener noreferrer">42</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Jul15-423.pdf#page=10" title="Puzzle Corner 43 · 2015 · PDF" aria-label="Puzzle Corner 43 · 2015 · PDF" target="_blank" rel="noopener noreferrer">43</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Sep15-424.pdf#page=8" title="Puzzle Corner 44 · 2015 · PDF" aria-label="Puzzle Corner 44 · 2015 · PDF" target="_blank" rel="noopener noreferrer">44</a>
+                  <a class="archive-link" href="https://austms.org.au/wp-content/uploads/2025/02/Nov15-425.pdf#page=8" title="Puzzle Corner 45 · 2015 · PDF" aria-label="Puzzle Corner 45 · 2015 · PDF" target="_blank" rel="noopener noreferrer">45</a>
+                </div>
+              </div>
+            </div>
+            <p class="archive-note">
+              <a href="https://austms.org.au/resources/publications/gazette/gazette534/" target="_blank" rel="noopener noreferrer">Browse the AustMS Gazette archive ↗</a>
+            </p>
+            <h3>Asia Pacific Mathematics Newsletter</h3>
+            <p>I wrote <em>Problem Corner</em>
+              <strong>3.1–7</strong>, from 2013 to 2017.</p>
+            <div class="archive newsletter-archive">
+              <div class="archive-row">
+                <span class="archive-year">2013</span>
+                <div class="archive-numbers">
+                  <a class="archive-link" href="https://www.asiapacific-mathnews.com/03/preserved-docs/0301/0046_0046.pdf" title="Problem Corner 3.1 · 2013 · PDF" aria-label="Problem Corner 3.1 · 2013 · PDF" target="_blank" rel="noopener noreferrer">3.1</a>
+                  <a class="archive-link" href="https://www.asiapacific-mathnews.com/03/preserved-docs/0302/0036_0037.pdf" title="Problem Corner 3.2 · 2013 · PDF" aria-label="Problem Corner 3.2 · 2013 · PDF" target="_blank" rel="noopener noreferrer">3.2</a>
+                  <a class="archive-link" href="https://www.asiapacific-mathnews.com/03/preserved-docs/0303/0032_0033.pdf" title="Problem Corner 3.3 · 2013 · PDF" aria-label="Problem Corner 3.3 · 2013 · PDF" target="_blank" rel="noopener noreferrer">3.3</a>
+                  <a class="archive-link" href="https://www.asiapacific-mathnews.com/previous.html" title="Problem Corner 3.4 · 2013 · publisher issue list" aria-label="Problem Corner 3.4 · 2013 · publisher issue list" target="_blank" rel="noopener noreferrer">3.4†</a>
+                </div>
+              </div>
+              <div class="archive-row">
+                <span class="archive-year">2014</span>
+                <div class="archive-numbers">
+                  <a class="archive-link" href="https://www.asiapacific-mathnews.com/04/preserved-docs/0401/0028_0029.pdf" title="Problem Corner 4.1 · 2014 · PDF" aria-label="Problem Corner 4.1 · 2014 · PDF" target="_blank" rel="noopener noreferrer">4.1</a>
+                  <a class="archive-link" href="https://www.asiapacific-mathnews.com/04/preserved-docs/0402/0020_0021.pdf" title="Problem Corner 4.2 · 2014 · PDF" aria-label="Problem Corner 4.2 · 2014 · PDF" target="_blank" rel="noopener noreferrer">4.2</a>
+                  <a class="archive-link" href="https://www.asiapacific-mathnews.com/04/preserved-docs/0403/0022_0023.pdf" title="Problem Corner 4.3 · 2014 · PDF" aria-label="Problem Corner 4.3 · 2014 · PDF" target="_blank" rel="noopener noreferrer">4.3</a>
+                  <a class="archive-link" href="https://www.asiapacific-mathnews.com/04/preserved-docs/0404/0028_0029.pdf" title="Problem Corner 4.4 · 2014 · PDF" aria-label="Problem Corner 4.4 · 2014 · PDF" target="_blank" rel="noopener noreferrer">4.4</a>
+                </div>
+              </div>
+              <div class="archive-row">
+                <span class="archive-year">2015</span>
+                <div class="archive-numbers">
+                  <a class="archive-link" href="https://www.asiapacific-mathnews.com/05/preserved-docs/0501/0034_0035.pdf" title="Problem Corner 5.1 · 2015 · PDF" aria-label="Problem Corner 5.1 · 2015 · PDF" target="_blank" rel="noopener noreferrer">5.1</a>
+                  <a class="archive-link" href="https://www.asiapacific-mathnews.com/05/preserved-docs/0502/0044_0045.pdf" title="Problem Corner 5.2 · 2015 · PDF" aria-label="Problem Corner 5.2 · 2015 · PDF" target="_blank" rel="noopener noreferrer">5.2</a>
+                </div>
+              </div>
+              <div class="archive-row">
+                <span class="archive-year">2016</span>
+                <div class="archive-numbers">
+                  <a class="archive-link" href="https://www.asiapacific-mathnews.com/06/preserved-docs/0601/0046_0047.pdf" title="Problem Corner 6.1 · 2016 · PDF" aria-label="Problem Corner 6.1 · 2016 · PDF" target="_blank" rel="noopener noreferrer">6.1</a>
+                  <a class="archive-link" href="https://www.asiapacific-mathnews.com/06/preserved-docs/0602/0056_0057.pdf" title="Problem Corner 6.2 · 2016 · PDF" aria-label="Problem Corner 6.2 · 2016 · PDF" target="_blank" rel="noopener noreferrer">6.2</a>
+                </div>
+              </div>
+              <div class="archive-row">
+                <span class="archive-year">2017</span>
+                <div class="archive-numbers">
+                  <a class="archive-link" href="https://www.asiapacific-mathnews.com/07/preserved-docs/0701/0044_0045.pdf" title="Problem Corner 7 · 2017 · PDF" aria-label="Problem Corner 7 · 2017 · PDF" target="_blank" rel="noopener noreferrer">7</a>
+                </div>
+              </div>
+            </div>
+            <p class="archive-note">† Opens the publisher’s issue list; choose Volume 3, Number 4. Some earlier newsletter PDFs may require publisher access.</p>
+            <h3>Puzzle hunts</h3>
+            <p>I wrote numerous (not-necessarily-mathematical) puzzles for the Sydney University Mathematics Society (SUMS) Puzzle Hunt from 2009 to 2013.</p>
+          </div>
+        </section>
+        <footer class="footer">
+          <span>Ivan Guo · Mathematics</span>
+          <span>
+            <a href="mailto:ivan.guo@monash.edu" target="_blank" rel="noopener noreferrer">ivan.guo@monash.edu</a>
+          </span>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>

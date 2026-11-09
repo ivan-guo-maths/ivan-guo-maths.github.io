@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Publications | Ivan Guo</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #fbf8f1;
+        --ink: #293330;
+        --muted: #59635d;
+        --rust: #a6482e;
+        --teal: #28655f;
+        --plum: #715679;
+        --line: #dddfd3;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font: 18px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      }
+
+      a {
+        color: var(--teal);
+        text-underline-offset: 4px;
+        overflow-wrap: anywhere;
+      }
+
+      a:hover {
+        color: var(--rust);
+      }
+
+      a:focus-visible {
+        outline: 3px solid var(--rust);
+        outline-offset: 4px;
+      }
+
+      .page {
+        max-width: 1160px;
+        padding: 34px 36px 28px;
+        margin: auto;
+      }
+
+      h1, h2 {
+        font-family: Georgia,"Times New Roman",serif;
+        font-weight: 400;
+        letter-spacing: -.025em;
+      }
+
+      h1 {
+        font-size: 51px;
+        line-height: 1.15;
+        color: var(--rust);
+        margin: 0 0 14px;
+      }
+
+      h2 {
+        font-size: 31px;
+        line-height: 1.25;
+        margin: 0 0 18px;
+      }
+
+      h3 {
+        font-size: 20px;
+        line-height: 1.4;
+        font-weight: 600;
+        margin: 0 0 12px;
+      }
+
+      p {
+        margin: 0 0 17px;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin: 0 0 9px;
+      }
+
+      .page-heading {
+        position: relative;
+        padding-right: 100px;
+        margin: 0 0 28px;
+      }
+
+      .page-heading .intro {
+        max-width: 860px;
+        font-size: 18px;
+        line-height: 1.7;
+        margin-bottom: 0;
+      }
+
+      .flourish {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 85px;
+        height: 86px;
+        pointer-events: none;
+      }
+
+      .footer {
+        margin-top: 30px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+        font-size: 13px;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .jump {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 22px;
+        margin: 20px 0 26px;
+      }
+
+      .jump a {
+        font-size: 14px;
+        min-height: 30px;
+        display: inline-flex;
+        align-items: center;
+        color: var(--plum);
+      }
+
+      .pub-group {
+        margin: 0 0 29px;
+      }
+
+      .pub-group h2 {
+        font: 600 20px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+        color: var(--teal);
+        letter-spacing: 0;
+        margin: 0;
+        padding: 0 0 10px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      #chapters h2 {
+        color: var(--plum);
+      }
+
+      #preprints h2 {
+        color: var(--rust);
+      }
+
+      .papers {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: grid;
+        grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+        column-gap: 32px;
+      }
+
+      .paper {
+        display: grid;
+        grid-template-columns: 38px minmax(0,1fr);
+        gap: 11px;
+        padding: 13px 0 10px;
+        border-bottom: 1px solid var(--line);
+        align-content: start;
+      }
+
+      .year {
+        font-size: 13px;
+        color: var(--rust);
+        line-height: 1.6;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .paper h3 {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.4;
+        margin: 0 0 5px;
+      }
+
+      .paper h3 a {
+        text-decoration: none;
+        color: var(--ink);
+      }
+
+      .paper h3 a:hover {
+        text-decoration: underline;
+        color: var(--rust);
+      }
+
+      .paper .metadata {
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .paper .metadata em {
+        font-style: normal;
+      }
+
+      .paper-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 13px;
+        margin-top: 3px;
+      }
+
+      .paper-links a {
+        font-size: 12px;
+        min-height: 29px;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      section[id], h1[id], div[id] {
+        scroll-margin-top: 18px;
+      }
+
+      @media(max-width:900px) {
+        .page {
+          padding: 28px;
+        }
+
+        .papers {
+          grid-template-columns: minmax(0,1fr);
+        }
+
+      }
+
+      @media(max-width:620px) {
+        body {
+          font-size: 17px;
+        }
+
+        .page {
+          padding: 25px 20px;
+        }
+
+        .page-heading {
+          padding-right: 0;
+          margin-bottom: 24px;
+        }
+
+        .page-heading .flourish {
+          display: none;
+        }
+
+        .page-heading .intro {
+          font-size: 17px;
+        }
+
+        h1 {
+          font-size: 43px;
+        }
+
+        h2 {
+          font-size: 29px;
+        }
+
+        .paper {
+          grid-template-columns: 36px 1fr;
+          gap: 10px;
+        }
+
+        .paper h3 {
+          font-size: 15.5px;
+        }
+
+        .paper .metadata {
+          font-size: 13px;
+        }
+
+        .paper-links a {
+          min-height: 36px;
+          font-size: 12px;
+        }
+
+        .footer {
+          font-size: 12px;
+        }
+
+        .jump {
+          gap: 5px 16px;
+        }
+
+        .jump a {
+          font-size: 13px;
+          min-height: 36px;
+        }
+
+      }
+
+      @media(prefers-reduced-motion:reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+      }
+
+      @media print {
+        .jump, .flourish {
+          display: none;
+        }
+
+        .page {
+          padding: 0;
+          max-width: none;
+        }
+
+        body {
+          background: white;
+          font-size: 12pt;
+        }
+
+        .papers {
+          grid-template-columns: 1fr;
+        }
+
+        .paper {
+          break-inside: avoid;
+        }
+
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="page">
+        <header class="page-heading">
+          <p class="eyebrow">Ivan Guo · Mathematics</p>
+          <h1 id="publications-title">Publications</h1>
+          <p class="intro">I sometimes write about mathematics. <a href="https://scholar.google.com/citations?hl=en&amp;user=IPDgZisAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a>
+          </p>
+          <svg class="flourish" viewbox="0 0 110 110" fill="none" aria-hidden="true">
+            <circle cx="75" cy="26" r="11" fill="#d9c3df"></circle>
+            <path d="M16 79C-5 55 82 10 89 39C97 73 7 103 18 66C25 43 102 39 97 68" stroke="#a6482e" stroke-width="1.7"></path>
+            <circle cx="31" cy="18" r="4" fill="#628c78"></circle>
+          </svg>
+        </header>
+        <nav class="jump" aria-label="Publication categories">
+          <a href="#journals">Refereed journal articles</a>
+          <a href="#chapters">Book chapters</a>
+          <a href="#preprints">Preprints</a>
+          <a href="#industry">Industry &amp; working papers</a>
+        </nav>
+        <section id="journals" class="pub-group" aria-labelledby="journals-title">
+          <h2 id="journals-title">Refereed journal articles</h2>
+          <ol class="papers">
+            <li class="paper">
+              <span class="year">2026</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1214/26-ECP790" target="_blank" rel="noopener noreferrer">Dynamic characterization of barycentric optimal transport problems and their martingale relaxation</a>
+                </h3>
+                <p class="metadata">I. Guo, S. Nilsson and J. Wiesel. <em>Electronic Communications in Probability 31, 1–9.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Dynamic characterization of barycentric optimal transport problems and their martingale relaxation">
+                  <a href="https://doi.org/10.1214/26-ECP790" target="_blank" rel="noopener noreferrer">Journal</a>
+                  <a href="https://arxiv.org/abs/2511.21287" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2026</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1016/j.spa.2026.104886" target="_blank" rel="noopener noreferrer">On stochastic partial differential equations and their applications to derivative pricing through a conditional Feynman-Kac formula</a>
+                </h3>
+                <p class="metadata">K. Das, I. Guo and G. Loeper. <em>Stochastic Processes and their Applications 195, 104886.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for On stochastic partial differential equations and their applications to derivative pricing through a conditional Feynman-Kac formula">
+                  <a href="https://doi.org/10.1016/j.spa.2026.104886" target="_blank" rel="noopener noreferrer">Journal</a>
+                  <a href="https://arxiv.org/abs/2106.14870" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2026</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1111/mafi.70010" target="_blank" rel="noopener noreferrer">Macroscopic market making games</a>
+                </h3>
+                <p class="metadata">I. Guo and S. Jin. <em>Mathematical Finance 36(2), 352–373.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Macroscopic market making games">
+                  <a href="https://doi.org/10.1111/mafi.70010" target="_blank" rel="noopener noreferrer">Journal</a>
+                  <a href="https://arxiv.org/abs/2406.05662" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">—</span>
+              <article>
+                <h3>
+                  <a href="https://arxiv.org/abs/2307.14129" target="_blank" rel="noopener noreferrer">Macroscopic market making</a>
+                </h3>
+                <p class="metadata">I. Guo, S. Jin and K. Nam. <em>Finance and Stochastics, accepted.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Macroscopic market making">
+                  <a href="https://arxiv.org/abs/2307.14129" target="_blank" rel="noopener noreferrer">arXiv</a>
+                  <a href="https://link.springer.com/journal/780/updates/19991928" target="_blank" rel="noopener noreferrer">Acceptance listing</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2025</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1080/14697688.2025.2472874" target="_blank" rel="noopener noreferrer">Simultaneous upper and lower bounds of American-style option prices with hedging via neural networks</a>
+                </h3>
+                <p class="metadata">I. Guo, N. Langrené and J. Wu. <em>Quantitative Finance 25(4), 509–525.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Simultaneous upper and lower bounds of American-style option prices with hedging via neural networks">
+                  <a href="https://doi.org/10.1080/14697688.2025.2472874" target="_blank" rel="noopener noreferrer">Journal</a>
+                  <a href="https://arxiv.org/abs/2302.12439" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2022</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1142/S0219024922500224" target="_blank" rel="noopener noreferrer">Valuation of general contingent claims with short selling bans: an equal-risk pricing approach</a>
+                </h3>
+                <p class="metadata">G. Ma, S. P. Zhu and I. Guo. <em>International Journal of Theoretical and Applied Finance 25(4–5), 2250022.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Valuation of general contingent claims with short selling bans: an equal-risk pricing approach">
+                  <a href="https://doi.org/10.1142/S0219024922500224" target="_blank" rel="noopener noreferrer">Journal</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2022</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1137/20M1375905" target="_blank" rel="noopener noreferrer">Joint modeling and calibration of SPX and VIX by optimal transport</a>
+                </h3>
+                <p class="metadata">I. Guo, G. Loeper, J. Obłój and S. Wang. <em>SIAM Journal on Financial Mathematics 13(1), 1–31.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Joint modeling and calibration of SPX and VIX by optimal transport">
+                  <a href="https://doi.org/10.1137/20M1375905" target="_blank" rel="noopener noreferrer">Journal</a>
+                  <a href="https://arxiv.org/abs/2004.02198" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2022</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1111/mafi.12335" target="_blank" rel="noopener noreferrer">Calibration of local-stochastic volatility models by optimal transport</a>
+                </h3>
+                <p class="metadata">I. Guo, G. Loeper and S. Wang. <em>Mathematical Finance 32(1), 46–77.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Calibration of local-stochastic volatility models by optimal transport">
+                  <a href="https://doi.org/10.1111/mafi.12335" target="_blank" rel="noopener noreferrer">Journal</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2022</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1080/14697688.2021.1967432" target="_blank" rel="noopener noreferrer">Portfolio optimization with a prescribed terminal wealth distribution</a>
+                </h3>
+                <p class="metadata">I. Guo, N. Langrené, G. Loeper and W. Ning. <em>Quantitative Finance 22(2), 333–347.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Portfolio optimization with a prescribed terminal wealth distribution">
+                  <a href="https://doi.org/10.1080/14697688.2021.1967432" target="_blank" rel="noopener noreferrer">Journal</a>
+                  <a href="https://arxiv.org/abs/2009.12823" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2022</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1007/s11579-021-00301-5" target="_blank" rel="noopener noreferrer">Robust utility maximization under model uncertainty via a penalization approach</a>
+                </h3>
+                <p class="metadata">I. Guo, N. Langrené, G. Loeper and W. Ning. <em>Mathematics and Financial Economics 16(1), 51–88.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Robust utility maximization under model uncertainty via a penalization approach">
+                  <a href="https://doi.org/10.1007/s11579-021-00301-5" target="_blank" rel="noopener noreferrer">Journal</a>
+                  <a href="https://arxiv.org/abs/1907.13345" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2021</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1214/20-AAP1617" target="_blank" rel="noopener noreferrer">Path dependent optimal transport and model calibration on exotic derivatives</a>
+                </h3>
+                <p class="metadata">I. Guo and G. Loeper. <em>Annals of Applied Probability 31(3), 1232–1263.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Path dependent optimal transport and model calibration on exotic derivatives">
+                  <a href="https://doi.org/10.1214/20-AAP1617" target="_blank" rel="noopener noreferrer">Journal</a>
+                  <a href="https://arxiv.org/abs/1812.03526" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2020</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1016/j.ejc.2020.103128" target="_blank" rel="noopener noreferrer">On the nonexistence of pseudo-generalized quadrangles</a>
+                </h3>
+                <p class="metadata">I. Guo, J. H. Koolen, G. Markowsky and J. Park. <em>European Journal of Combinatorics 89, 103128.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for On the nonexistence of pseudo-generalized quadrangles">
+                  <a href="https://doi.org/10.1016/j.ejc.2020.103128" target="_blank" rel="noopener noreferrer">Journal</a>
+                  <a href="https://arxiv.org/abs/1909.07609" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2019</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1016/j.jedc.2019.01.006" target="_blank" rel="noopener noreferrer">Optimal execution with regime-switching market resilience</a>
+                </h3>
+                <p class="metadata">C. C. Siu, I. Guo, S. P. Zhu and R. J. Elliott. <em>Journal of Economic Dynamics and Control 101, 17–40.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Optimal execution with regime-switching market resilience">
+                  <a href="https://doi.org/10.1016/j.jedc.2019.01.006" target="_blank" rel="noopener noreferrer">Journal</a>
+                  <a href="https://www.monash.edu/__data/assets/pdf_file/0006/1452147/WP_CQFIS_18_5.pdf" target="_blank" rel="noopener noreferrer">Working paper PDF</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2018</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1007/s10957-017-1168-2" target="_blank" rel="noopener noreferrer">Pricing bounds for volatility derivatives via duality and least squares Monte Carlo</a>
+                </h3>
+                <p class="metadata">I. Guo and G. Loeper. <em>Journal of Optimization Theory and Applications 179(2), 598–617.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Pricing bounds for volatility derivatives via duality and least squares Monte Carlo">
+                  <a href="https://doi.org/10.1007/s10957-017-1168-2" target="_blank" rel="noopener noreferrer">Journal</a>
+                  <a href="https://research.monash.edu/en/publications/pricing-bounds-for-volatility-derivatives-via-duality-and-least-s/" target="_blank" rel="noopener noreferrer">University record</a>
+                  <a href="https://arxiv.org/abs/1611.00464" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2017</span>
+              <article>
+                <h3>
+                  <a href="https://www.cambridge.org/core/journals/anziam-journal/article/pricing-european-options-on-regimeswitching-assets-a-comparative-study-of-monte-carlo-and-finitedifference-approaches/5A15C82EE2006D03A339EB693BDC90E3" target="_blank" rel="noopener noreferrer">Pricing European options on regime-switching assets: a comparative study of Monte Carlo and finite-difference approaches</a>
+                </h3>
+                <p class="metadata">X. C. Zeng, I. Guo and S. P. Zhu. <em>The ANZIAM Journal 59(2), 183–199.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Pricing European options on regime-switching assets: a comparative study of Monte Carlo and finite-difference approaches">
+                  <a href="https://www.cambridge.org/core/journals/anziam-journal/article/pricing-european-options-on-regimeswitching-assets-a-comparative-study-of-monte-carlo-and-finitedifference-approaches/5A15C82EE2006D03A339EB693BDC90E3" target="_blank" rel="noopener noreferrer">Journal</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2017</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1016/j.jedc.2017.01.005" target="_blank" rel="noopener noreferrer">Equal risk pricing under convex trading constraints</a>
+                </h3>
+                <p class="metadata">I. Guo and S.-P. Zhu. <em>Journal of Economic Dynamics and Control 76, 136–151.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Equal risk pricing under convex trading constraints">
+                  <a href="https://doi.org/10.1016/j.jedc.2017.01.005" target="_blank" rel="noopener noreferrer">Journal</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2017</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1007/s00780-016-0315-1" target="_blank" rel="noopener noreferrer">Arbitrage-free pricing of multi-person game claims in discrete time</a>
+                </h3>
+                <p class="metadata">I. Guo and M. Rutkowski. <em>Finance and Stochastics 21(1), 111–155.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Arbitrage-free pricing of multi-person game claims in discrete time">
+                  <a href="https://doi.org/10.1007/s00780-016-0315-1" target="_blank" rel="noopener noreferrer">Journal</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2016</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1016/j.spa.2015.07.013" target="_blank" rel="noopener noreferrer">Discrete time stochastic multi-player competitive games with affine payoffs</a>
+                </h3>
+                <p class="metadata">I. Guo and M. Rutkowski. <em>Stochastic Processes and their Applications 126(1), 1–32.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Discrete time stochastic multi-player competitive games with affine payoffs">
+                  <a href="https://doi.org/10.1016/j.spa.2015.07.013" target="_blank" rel="noopener noreferrer">Journal</a>
+                  <a href="https://arxiv.org/abs/1405.2716" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2014</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1142/S0219024914500368" target="_blank" rel="noopener noreferrer">Effective and simple VWAP options pricing model</a>
+                </h3>
+                <p class="metadata">A. Buryak and I. Guo. <em>International Journal of Theoretical and Applied Finance 17(6), 1450036.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Effective and simple VWAP options pricing model">
+                  <a href="https://doi.org/10.1142/S0219024914500368" target="_blank" rel="noopener noreferrer">Journal</a>
+                  <a href="https://arxiv.org/abs/1407.7315" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2012</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1515/dema-2013-0374" target="_blank" rel="noopener noreferrer">A zero-sum competitive multi-player game</a>
+                </h3>
+                <p class="metadata">I. Guo and M. Rutkowski. <em>Demonstratio Mathematica 45(2), 415–433.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for A zero-sum competitive multi-player game">
+                  <a href="https://doi.org/10.1515/dema-2013-0374" target="_blank" rel="noopener noreferrer">Journal</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2012</span>
+              <article>
+                <h3>
+                  <a href="https://arxiv.org/abs/1407.7328" target="_blank" rel="noopener noreferrer">New analytic approach to address put-call parity violation due to discrete dividends</a>
+                </h3>
+                <p class="metadata">A. Buryak and I. Guo. <em>Applied Mathematical Finance 19(1), 37–58.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for New analytic approach to address put-call parity violation due to discrete dividends">
+                  <a href="https://arxiv.org/abs/1407.7328" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+          </ol>
+        </section>
+        <section id="chapters" class="pub-group" aria-labelledby="chapters-title">
+          <h2 id="chapters-title">Book chapters</h2>
+          <ol class="papers">
+            <li class="paper">
+              <span class="year">2019</span>
+              <article>
+                <h3>
+                  <a href="https://doi.org/10.1007/978-3-030-04161-8_5" target="_blank" rel="noopener noreferrer">Local volatility calibration by optimal transport</a>
+                </h3>
+                <p class="metadata">I. Guo, G. Loeper and S. Wang. <em>2017 MATRIX Annals, Springer, pp. 51–64.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Local volatility calibration by optimal transport">
+                  <a href="https://doi.org/10.1007/978-3-030-04161-8_5" target="_blank" rel="noopener noreferrer">Chapter</a>
+                  <a href="https://www.matrix-inst.org.au/wp_Matrix2016/wp-content/uploads/2018/05/Guo.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2014</span>
+              <article>
+                <h3>
+                  <a href="https://talus.maths.usyd.edu.au/u/pubs/publist/pubs2014.html" target="_blank" rel="noopener noreferrer">Discrete-time multi-player stopping and quitting games with redistribution of payoffs</a>
+                </h3>
+                <p class="metadata">I. Guo and M. Rutkowski. <em>Arbitrage, Credit and Informational Risks, edited by C. Hillairet, M. Jeanblanc and Y. Jiao. World Scientific, pp. 171–206.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Discrete-time multi-player stopping and quitting games with redistribution of payoffs">
+                  <a href="https://talus.maths.usyd.edu.au/u/pubs/publist/pubs2014.html" target="_blank" rel="noopener noreferrer">University record</a>
+                </div>
+              </article>
+            </li>
+          </ol>
+        </section>
+        <section id="preprints" class="pub-group" aria-labelledby="preprints-title">
+          <h2 id="preprints-title">Preprints</h2>
+          <ol class="papers">
+            <li class="paper">
+              <span class="year">2025</span>
+              <article>
+                <h3>
+                  <a href="https://arxiv.org/abs/2510.05463" target="_blank" rel="noopener noreferrer">Robust pricing and hedging of American options in continuous time</a>
+                </h3>
+                <p class="metadata">I. Guo and J. Obłój. <em>arXiv:2510.05463.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Robust pricing and hedging of American options in continuous time">
+                  <a href="https://arxiv.org/abs/2510.05463" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2025</span>
+              <article>
+                <h3>
+                  <a href="https://arxiv.org/abs/2504.06717" target="_blank" rel="noopener noreferrer">Optimal execution and macroscopic market making</a>
+                </h3>
+                <p class="metadata">I. Guo and S. Jin. <em>arXiv:2504.06717, revised 2026.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Optimal execution and macroscopic market making">
+                  <a href="https://arxiv.org/abs/2504.06717" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2025</span>
+              <article>
+                <h3>
+                  <a href="https://arxiv.org/abs/2503.06967" target="_blank" rel="noopener noreferrer">Switching to a Green and sustainable finance setting: a mean field game approach</a>
+                </h3>
+                <p class="metadata">A. Aksamit, K. Das, I. Guo, K. Nam and Z. Zhou. <em>arXiv:2503.06967.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Switching to a Green and sustainable finance setting: a mean field game approach">
+                  <a href="https://arxiv.org/abs/2503.06967" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2021</span>
+              <article>
+                <h3>
+                  <a href="https://arxiv.org/abs/2111.14502" target="_blank" rel="noopener noreferrer">Superhedging duality for multi-action options under model uncertainty with information delay</a>
+                </h3>
+                <p class="metadata">A. Aksamit, I. Guo, S. Liu and Z. Zhou. <em>arXiv:2111.14502, revised 2023.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Superhedging duality for multi-action options under model uncertainty with information delay">
+                  <a href="https://arxiv.org/abs/2111.14502" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2021</span>
+              <article>
+                <h3>
+                  <a href="https://arxiv.org/abs/2103.03628" target="_blank" rel="noopener noreferrer">Deep semi-martingale optimal transport</a>
+                </h3>
+                <p class="metadata">I. Guo, N. Langrené, G. Loeper and W. Ning. <em>arXiv:2103.03628.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Deep semi-martingale optimal transport">
+                  <a href="https://arxiv.org/abs/2103.03628" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2020</span>
+              <article>
+                <h3>
+                  <a href="https://arxiv.org/abs/2008.06882" target="_blank" rel="noopener noreferrer">On Dynkin Games with Unordered Payoff Processes</a>
+                </h3>
+                <p class="metadata">I. Guo. <em>arXiv:2008.06882.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for On Dynkin Games with Unordered Payoff Processes">
+                  <a href="https://arxiv.org/abs/2008.06882" target="_blank" rel="noopener noreferrer">arXiv</a>
+                </div>
+              </article>
+            </li>
+          </ol>
+        </section>
+        <section id="industry" class="pub-group" aria-labelledby="industry-title">
+          <h2 id="industry-title">Industry &amp; working papers</h2>
+          <ol class="papers">
+            <li class="paper">
+              <span class="year">2022</span>
+              <article>
+                <h3>
+                  <a href="https://www.risk.net/cutting-edge/banking/7911646/optimal-transport-for-model-calibration" target="_blank" rel="noopener noreferrer">Optimal transport for model calibration</a>
+                </h3>
+                <p class="metadata">I. Guo, G. Loeper, J. Obłój and S. Wang. <em>Risk.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Optimal transport for model calibration">
+                  <a href="https://www.risk.net/cutting-edge/banking/7911646/optimal-transport-for-model-calibration" target="_blank" rel="noopener noreferrer">Risk</a>
+                  <a href="https://ora.ox.ac.uk/objects/uuid%3A72e2acbc-1163-49e4-ae5e-cb1afabf1e3c" target="_blank" rel="noopener noreferrer">Oxford record</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2020</span>
+              <article>
+                <h3>
+                  <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3688843" target="_blank" rel="noopener noreferrer">Efficient use of options for tail risk hedging</a>
+                </h3>
+                <p class="metadata">I. Guo and G. Loeper. <em>Monash CQFIS working paper, revised 2021.</em>
+                </p>
+                <div class="paper-links" aria-label="Links for Efficient use of options for tail risk hedging">
+                  <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3688843" target="_blank" rel="noopener noreferrer">SSRN</a>
+                </div>
+              </article>
+            </li>
+            <li class="paper">
+              <span class="year">2020</span>
+              <article>
+                <h3>
+                  <a href="https://www.monash.edu/__data/assets/pdf_file/0010/1726228/WP_CQFIS_2019_3.pdf" target="_blank" rel="noopener noreferrer">The volatility risk premium: an empirical study on the S&amp;P 500 index</a>
+                </h3>
+                <p class="metadata">I. Guo and G. Loeper. <em>Monash CQFIS working paper (2020 manuscript).</em>
+                </p>
+                <div class="paper-links" aria-label="Links for The volatility risk premium: an empirical study on the S&amp;P 500 index">
+                  <a href="https://www.monash.edu/__data/assets/pdf_file/0010/1726228/WP_CQFIS_2019_3.pdf" target="_blank" rel="noopener noreferrer">Working paper PDF</a>
+                  <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3739933" target="_blank" rel="noopener noreferrer">SSRN</a>
+                </div>
+              </article>
+            </li>
+          </ol>
+        </section>
+        <footer class="footer">
+          <span>Ivan Guo · Mathematics</span>
+          <span>
+            <a href="mailto:ivan.guo@monash.edu" target="_blank" rel="noopener noreferrer">ivan.guo@monash.edu</a>
+          </span>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Research Talks | Ivan Guo</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #fbf8f1;
+        --ink: #293330;
+        --muted: #59635d;
+        --rust: #a6482e;
+        --teal: #28655f;
+        --plum: #715679;
+        --line: #dddfd3;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font: 18px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      }
+
+      a {
+        color: var(--teal);
+        text-underline-offset: 4px;
+        overflow-wrap: anywhere;
+      }
+
+      a:hover {
+        color: var(--rust);
+      }
+
+      a:focus-visible {
+        outline: 3px solid var(--rust);
+        outline-offset: 4px;
+      }
+
+      .page {
+        max-width: 1160px;
+        padding: 34px 36px 28px;
+        margin: auto;
+      }
+
+      .reading {
+        max-width: 1010px;
+      }
+
+      h1, h2 {
+        font-family: Georgia,"Times New Roman",serif;
+        font-weight: 400;
+        letter-spacing: -.025em;
+      }
+
+      h1 {
+        font-size: 51px;
+        line-height: 1.15;
+        color: var(--rust);
+        margin: 0 0 14px;
+      }
+
+      h2 {
+        font-size: 31px;
+        line-height: 1.25;
+        margin: 0 0 18px;
+      }
+
+      h3 {
+        font-size: 20px;
+        line-height: 1.4;
+        font-weight: 600;
+        margin: 0 0 12px;
+      }
+
+      p {
+        margin: 0 0 17px;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin: 0 0 9px;
+      }
+
+      .page-heading {
+        position: relative;
+        padding-right: 100px;
+        margin: 0 0 28px;
+      }
+
+      .page-heading .intro {
+        max-width: 860px;
+        font-size: 18px;
+        line-height: 1.7;
+        margin-bottom: 0;
+      }
+
+      .flourish {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 85px;
+        height: 86px;
+        pointer-events: none;
+      }
+
+      .footer {
+        margin-top: 30px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+        font-size: 13px;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .jump {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 22px;
+        margin: 20px 0 26px;
+      }
+
+      .jump a {
+        font-size: 14px;
+        min-height: 30px;
+        display: inline-flex;
+        align-items: center;
+        color: var(--plum);
+      }
+
+      .year {
+        font-size: 13px;
+        color: var(--rust);
+        line-height: 1.6;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .talk-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .talk {
+        display: grid;
+        grid-template-columns: 100px minmax(0,1fr);
+        gap: 23px;
+        padding: 17px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .talk .year {
+        padding-top: 2px;
+      }
+
+      .talk h2 {
+        font: 600 17px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+        letter-spacing: 0;
+        margin: 0 0 7px;
+      }
+
+      .talk h2+h2 {
+        margin-top: 9px;
+      }
+
+      .venues {
+        font-size: 14px;
+        line-height: 1.65;
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .venue {
+        display: block;
+      }
+
+      .talk-year-label {
+        color: var(--plum);
+      }
+
+      section[id], h1[id], div[id] {
+        scroll-margin-top: 18px;
+      }
+
+      .general-interest {
+        margin-top: 34px;
+        padding-top: 27px;
+        border-top: 1px solid var(--line);
+      }
+
+      .general-interest>h2 {
+        font-size: 29px;
+        margin-bottom: 18px;
+      }
+
+      .interest-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 30px;
+      }
+
+      .interest-group h3 {
+        font-size: 14px;
+        color: var(--teal);
+        line-height: 1.55;
+        margin-bottom: 8px;
+      }
+
+      .interest-group ul {
+        padding-left: 18px;
+        margin: 0;
+      }
+
+      .interest-group li {
+        font-size: 15px;
+        line-height: 1.6;
+        margin: 0 0 4px;
+      }
+
+      @media(max-width:900px) {
+        .page {
+          padding: 28px;
+        }
+
+      }
+
+      @media(max-width:620px) {
+        body {
+          font-size: 17px;
+        }
+
+        .page {
+          padding: 25px 20px;
+        }
+
+        .page-heading {
+          padding-right: 0;
+          margin-bottom: 24px;
+        }
+
+        .page-heading .flourish {
+          display: none;
+        }
+
+        .page-heading .intro {
+          font-size: 17px;
+        }
+
+        h1 {
+          font-size: 43px;
+        }
+
+        h2 {
+          font-size: 29px;
+        }
+
+        .talk {
+          grid-template-columns: 1fr;
+          gap: 5px;
+          padding: 15px 0;
+        }
+
+        .talk h2 {
+          font-size: 16px;
+        }
+
+        .talk .year {
+          font-size: 12px;
+        }
+
+        .venues {
+          font-size: 13px;
+          line-height: 1.65;
+        }
+
+        .footer {
+          font-size: 12px;
+        }
+
+        .jump {
+          gap: 5px 16px;
+        }
+
+        .jump a {
+          font-size: 13px;
+          min-height: 36px;
+        }
+
+        .interest-grid {
+          grid-template-columns: 1fr;
+        }
+
+      }
+
+      @media(prefers-reduced-motion:reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+      }
+
+      @media print {
+        .jump, .flourish {
+          display: none;
+        }
+
+        .page {
+          padding: 0;
+          max-width: none;
+        }
+
+        body {
+          background: white;
+          font-size: 12pt;
+        }
+
+        .talk {
+          break-inside: avoid;
+        }
+
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="page reading">
+        <header class="page-heading">
+          <p class="eyebrow">Ivan Guo · Mathematics</p>
+          <h1 id="talks-title">Research talks</h1>
+          <p class="intro">I sometimes talk about mathematics.</p>
+          <svg class="flourish" viewBox="0 0 110 110" fill="none" aria-hidden="true">
+            <circle cx="75" cy="26" r="11" fill="#d9c3df"></circle>
+            <path d="M16 79C-5 55 82 10 89 39C97 73 7 103 18 66C25 43 102 39 97 68" stroke="#a6482e" stroke-width="1.7"></path>
+            <circle cx="31" cy="18" r="4" fill="#628c78"></circle>
+          </svg>
+        </header>
+        <nav class="jump" aria-label="Talk sections">
+          <a href="#research-talk-list">Research talks</a>
+          <a href="#general-interest-title">General-interest talks</a>
+        </nav>
+        <ol class="talk-list" id="research-talk-list">
+          <li class="talk" id="T01">
+            <span class="year talk-year-label">2025</span>
+            <article>
+              <h2>Superhedging Duality with Liquid Multi-action Options</h2>
+              <p class="venues">
+                <span class="venue">Quantitative Methods in Finance · 2025</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T02">
+            <span class="year talk-year-label">2025</span>
+            <article>
+              <h2>Partially Ordered Peacocks (PCOCs)</h2>
+              <p class="venues">
+                <span class="venue">69th Annual Meeting of the Australian Mathematical Society · 2025</span>
+                <span class="venue">CIRM Workshop: Advances in Mathematics of Randomness for Handling Risks in Finance and Insurance · 2025</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T03">
+            <span class="year talk-year-label">2021–2025</span>
+            <article>
+              <h2>Robust hedging of American options in continuous time</h2>
+              <p class="venues">
+                <span class="venue">MATRIX Workshop: Mathematics of Risk · 2025</span>
+                <span class="venue">BNP Paribas Futures of Quantitative Finance Seminar · 2025</span>
+                <span class="venue">LPSM Seminar: Mathématiques financières et actuarielles, probabilités numériques · 2025</span>
+                <span class="venue">12th General AMaMeF Conference, Verona · 2024</span>
+                <span class="venue">Quantitative Methods in Finance Conference, Sydney · 2024</span>
+                <span class="venue">BIRS Workshop: Stochastic Mass Transports, Banff/Online · 2022</span>
+                <span class="venue">NUS-USyd-NUSRI workshop · 2021</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T04">
+            <span class="year talk-year-label">2025</span>
+            <article>
+              <h2>Model Calibration via Optimal Transport</h2>
+              <p class="venues">
+                <span class="venue">Sydney Financial Mathematics Workshop · 2025</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T05">
+            <span class="year talk-year-label">2020–2025</span>
+            <article>
+              <h2>Path-dependent/Semimartingale optimal transport with applications</h2>
+              <p class="venues">
+                <span class="venue">Vienna Seminar in Mathematical Finance and Probability · 2025</span>
+                <span class="venue">Seminars in Insurance and Economics, University of Copenhagen · 2025</span>
+                <span class="venue">Stochastic Analysis &amp; Mathematical Finance Seminars, University of Oxford · 2024</span>
+                <span class="venue">Stochastics and Finance Seminar, University of Sydney · 2020</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T06">
+            <span class="year talk-year-label">2024</span>
+            <article>
+              <h2>From Hahn-Banach to Monge-Kantorovich</h2>
+              <p class="venues">
+                <span class="venue">Monash University School of Mathematics All-School Seminar · 2024</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T07">
+            <span class="year talk-year-label">2023</span>
+            <article>
+              <h2>An Efficient Frontier of Wealth Distributions with Connections to Utility Maximisation</h2>
+              <p class="venues">
+                <span class="venue">67th Annual Meeting of AustMS, University of Queensland · 2023</span>
+                <span class="venue">Spring camp in financial mathematics, Jervis Bay · 2023</span>
+                <span class="venue">Minisymposium on Optimal Transport and Applications in Mathematical Finance, SIAM Conference on Financial Mathematics and Engineering, Philadelphia · 2023</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T08">
+            <span class="year talk-year-label">2022</span>
+            <article>
+              <h2>Machine Learning Algorithms in Finance</h2>
+              <p class="venues">
+                <span class="venue">Lecture series, MATRIX: Mathematics of Risk · 2022</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T09">
+            <span class="year talk-year-label">2022</span>
+            <article>
+              <h2>Stochastic Optimal Transport in Financial Mathematics</h2>
+              <p class="venues">
+                <span class="venue">Sydney Mathematical Research Institute (SMRI) Seminar · 2022</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T11">
+            <span class="year talk-year-label">2019</span>
+            <article>
+              <h2>Designing Allweather Overlays</h2>
+              <p class="venues">
+                <span class="venue">BNP Paribas QIS Forum: Quant meets Tech · 2019</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T12">
+            <span class="year talk-year-label">2019</span>
+            <article>
+              <h2>Convex duality in robust hedging and optimal stopping problems</h2>
+              <p class="venues">
+                <span class="venue">63rd Annual Meeting of AustMS, Monash University · 2019</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T13">
+            <span class="year talk-year-label">2019</span>
+            <article>
+              <h2>Path dependent optimal transport and model calibration on exotic derivatives</h2>
+              <p class="venues">
+                <span class="venue">7th Asian Quantitative Finance Conference, Hanoi · 2019</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T14">
+            <span class="year talk-year-label">2019</span>
+            <article>
+              <h2>The volatility risk premium: an empirical study on equity indices</h2>
+              <p class="venues">
+                <span class="venue">Monash-QGroup Colloquium, Melbourne · 2019</span>
+                <span class="venue">Victorian Funds Management Corporation Seminar · 2019</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T15">
+            <span class="year talk-year-label">2018</span>
+            <article>
+              <h2>Calibrating volatility to exotic derivatives: a variational approach</h2>
+              <p class="venues">
+                <span class="venue">Quantitative Methods in Finance Conference, Sydney · 2018</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T16">
+            <span class="year talk-year-label">2018</span>
+            <article>
+              <h2>Machine learning in stochastic optimal transport and volatility calibration</h2>
+              <p class="venues">
+                <span class="venue">6th NUS-USPC Workshop on Machine Learning and FinTech, NUS · 2018</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T17">
+            <span class="year talk-year-label">2017</span>
+            <article>
+              <h2>Mixed PDE / least squares Monte Carlo methods for option pricing</h2>
+              <h2>Arbitrage-free pricing of multi-person game options</h2>
+              <p class="venues">
+                <span class="venue">Statistics and Probability Seminars, Monash University · 2017</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T18">
+            <span class="year talk-year-label">2016</span>
+            <article>
+              <h2>Least-squares Monte Carlo and duality methods for VIX forwards</h2>
+              <p class="venues">
+                <span class="venue">Mini Conference on Numerical Methods, University of Melbourne · 2016</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T19">
+            <span class="year talk-year-label">2015</span>
+            <article>
+              <h2>Equal risk pricing under convex trading constraints and the short selling ban</h2>
+              <p class="venues">
+                <span class="venue">Quantitative Methods in Finance Conference, Sydney · 2015</span>
+                <span class="venue">University of Wollongong Financial Mathematics Seminar · 2015</span>
+                <span class="venue">University of Sydney Financial Mathematics Seminar · 2015</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T20">
+            <span class="year talk-year-label">2010–2013</span>
+            <article>
+              <h2>Multi-player Dynkin games and multi-person game options</h2>
+              <p class="venues">
+                <span class="venue">University of Sydney Financial Mathematics Seminar · 2013</span>
+                <span class="venue">Bachelier Finance Society Congress, Sydney · 2012</span>
+                <span class="venue">55th Annual Meeting of AustMS, University of Wollongong · 2011</span>
+                <span class="venue">54th Annual Meeting of AustMS, University of Queensland · 2010</span>
+              </p>
+            </article>
+          </li>
+          <li class="talk" id="T21">
+            <span class="year talk-year-label">2007, 2010</span>
+            <article>
+              <h2>An Asymptotic Expansion Method for Pricing Exotics</h2>
+              <h2>The Pedersen Method for Calibrating Libor Market Model</h2>
+              <p class="venues">
+                <span class="venue">NAB Market Risk Quantitative Support Group Seminars · 2007 and 2010</span>
+              </p>
+            </article>
+          </li>
+        </ol>
+        <section class="general-interest" aria-labelledby="general-interest-title">
+          <h2 id="general-interest-title">General-interest talks</h2>
+          <div class="interest-grid">
+            <article class="interest-group">
+              <h3>Monash University Open Day · 2024</h3>
+              <ul>
+                <li>A tale of tiles</li>
+              </ul>
+            </article>
+            <article class="interest-group" id="T10">
+              <h3>AustMS Early-Career Workshop, Online · 2021</h3>
+              <ul>
+                <li>Dualities in Financial Mathematics</li>
+              </ul>
+            </article>
+            <article class="interest-group">
+              <h3>LunchMaths, Monash University · 2017</h3>
+              <ul>
+                <li>Brouwer's fixed-point theorem</li>
+              </ul>
+            </article>
+            <article class="interest-group">
+              <h3>University of Sydney Postgraduate Seminars · 2010, 2013</h3>
+              <ul>
+                <li>Multi-person redistribution games</li>
+                <li>From the hexagons of Pascal to the cubics of Cayley-Bacharach</li>
+              </ul>
+            </article>
+            <article class="interest-group">
+              <h3>University of New South Wales Postgraduate Seminar · 2009</h3>
+              <ul>
+                <li>Farey fractions</li>
+              </ul>
+            </article>
+            <article class="interest-group">
+              <h3>Sydney University Mathematics Society (SUMS) · 2009–2014</h3>
+              <ul>
+                <li>Lengths, areas and projections</li>
+                <li>A collection of hat puzzles</li>
+                <li>Tiling problems</li>
+                <li>The divine ratio</li>
+                <li>Hats, buckets and Pascal's triangle</li>
+                <li>Crazy triangle properties</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+        <footer class="footer">
+          <span>Ivan Guo · Mathematics</span>
+          <span>
+            <a href="mailto:ivan.guo@monash.edu" target="_blank" rel="noopener noreferrer">ivan.guo@monash.edu</a>
+          </span>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>

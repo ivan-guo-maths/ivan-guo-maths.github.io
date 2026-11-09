@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home | Ivan Guo</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #fbf8f1;
+        --ink: #293330;
+        --muted: #59635d;
+        --rust: #a6482e;
+        --teal: #28655f;
+        --plum: #715679;
+        --line: #dddfd3;
+        --sage: #e7eee5;
+        --lilac: #efe8f2;
+        --peach: #f6e8dd;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font: 18px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      }
+
+      a {
+        color: var(--teal);
+        text-underline-offset: 4px;
+        overflow-wrap: anywhere;
+      }
+
+      a:hover {
+        color: var(--rust);
+      }
+
+      a:focus-visible {
+        outline: 3px solid var(--rust);
+        outline-offset: 4px;
+      }
+
+      .page {
+        max-width: 1160px;
+        padding: 34px 36px 28px;
+        margin: auto;
+      }
+
+      h1 {
+        font-family: Georgia,"Times New Roman",serif;
+        font-weight: 400;
+        letter-spacing: -.025em;
+        font-size: 51px;
+        line-height: 1.15;
+        color: var(--rust);
+        margin: 0 0 14px;
+      }
+
+      h2 {
+        font-family: Georgia,"Times New Roman",serif;
+        font-weight: 400;
+        letter-spacing: -.025em;
+        font-size: 31px;
+        line-height: 1.25;
+        margin: 0 0 18px;
+      }
+
+      h3 {
+        font-size: 20px;
+        line-height: 1.4;
+        font-weight: 600;
+        margin: 0 0 12px;
+      }
+
+      p {
+        margin: 0 0 17px;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin: 0 0 9px;
+      }
+
+      .flourish {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 85px;
+        height: 86px;
+        pointer-events: none;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 310px minmax(0,1fr);
+        gap: 44px;
+        align-items: start;
+        margin-bottom: 24px;
+      }
+
+      .role {
+        font-size: 17px;
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      .hero .bio {
+        position: relative;
+        padding-right: 62px;
+        padding-top: 30px;
+      }
+
+      .hero .bio p {
+        font-size: 18px;
+      }
+
+      .hero .flourish {
+        right: -6px;
+        top: -10px;
+        width: 68px;
+      }
+
+      .profiles {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin: 0 0 34px;
+      }
+
+      .profiles a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 43px;
+        padding: 6px 13px;
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 1.5;
+        text-decoration: none;
+        background: var(--sage);
+        color: var(--teal);
+      }
+
+      .profiles a:nth-child(2) {
+        background: var(--lilac);
+        color: var(--plum);
+      }
+
+      .profiles a:nth-child(3) {
+        background: var(--peach);
+        color: var(--rust);
+      }
+
+      .profiles a:hover {
+        text-decoration: underline;
+      }
+
+      .section {
+        padding: 30px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+        gap: 38px;
+      }
+
+      .two-col p, .two-col li {
+        font-size: 17px;
+        line-height: 1.7;
+      }
+
+      .two-col ul {
+        padding-left: 19px;
+        margin: 0;
+      }
+
+      .two-col li+li {
+        margin-top: 8px;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin: 17px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tags li {
+        padding: 4px 9px;
+        background: var(--sage);
+        color: var(--teal);
+        border-radius: 3px;
+        font-size: 13px!important;
+        line-height: 1.55!important;
+      }
+
+      .tags li:nth-child(3n+2) {
+        background: var(--lilac);
+        color: var(--plum);
+      }
+
+      .tags li:nth-child(3n) {
+        background: var(--peach);
+        color: var(--rust);
+      }
+
+      .affiliations {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .affiliation {
+        border-top: 3px solid var(--teal);
+        padding: 16px 18px;
+        background: var(--sage);
+        border-radius: 0 0 4px 4px;
+      }
+
+      .affiliation:nth-child(2) {
+        border-color: var(--plum);
+        background: var(--lilac);
+      }
+
+      .affiliation h3 {
+        font-family: Georgia,"Times New Roman",serif;
+        font-size: 23px;
+        font-weight: 400;
+      }
+
+      .affiliation p {
+        font-size: 16px;
+        margin: 0;
+      }
+
+      .contact {
+        padding: 23px 25px;
+        background: var(--sage);
+        border-radius: 4px;
+      }
+
+      .contact p {
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+
+      .email {
+        font-size: 21px;
+      }
+
+      .footer {
+        margin-top: 30px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+        font-size: 13px;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      section[id], h1[id], div[id] {
+        scroll-margin-top: 18px;
+      }
+
+      .portrait {
+        width: 220px;
+        aspect-ratio: 4/5;
+        margin: 21px 0 0;
+        border-radius: 20px;
+        border: 1px solid #cbd4c6;
+        background: linear-gradient(145deg,#e7eee5 0%,#efe8f2 100%);
+        object-fit: cover;
+        display: block;
+        height: 250px;
+        object-position: 53% center;
+      }
+
+      .two-col .teaching-history {
+        list-style: none;
+        padding: 0;
+        margin: 11px 0 0;
+      }
+
+      .two-col .teaching-history li {
+        font-size: 16px;
+        line-height: 1.65;
+        margin: 0 0 9px;
+        color: var(--muted);
+      }
+
+      .two-col .teaching-history strong {
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      .teaching-history-title {
+        font: 600 16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+        margin: 18px 0 8px;
+        font-size: 18px;
+      }
+
+      .funding-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 32px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .funding-list li {
+        display: grid;
+        grid-template-columns: 76px minmax(0,1fr);
+        gap: 12px;
+        padding: 13px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .funding-year {
+        font-size: 12px;
+        color: var(--rust);
+        padding-top: 2px;
+      }
+
+      .funding-list h3 {
+        font-size: 14px;
+        line-height: 1.5;
+        margin: 0 0 4px;
+        font-weight: 600;
+      }
+
+      .funding-list p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .two-col .tags li {
+        margin-top: 0;
+      }
+
+      .profiles a[href^="mailto:"] {
+        background: var(--lilac);
+        color: var(--plum);
+      }
+
+      .bio .profiles {
+        margin: 22px 0 0;
+      }
+
+      @media (max-width:900px) {
+        .page {
+          padding: 28px;
+        }
+
+        .hero {
+          grid-template-columns: 260px 1fr;
+          gap: 28px;
+        }
+
+        .hero .bio {
+          padding-right: 0;
+        }
+
+        .hero .flourish {
+          display: none;
+        }
+
+      }
+
+      @media (max-width:620px) {
+        body {
+          font-size: 17px;
+        }
+
+        .page {
+          padding: 25px 20px;
+        }
+
+        h1 {
+          font-size: 43px;
+        }
+
+        h2 {
+          font-size: 29px;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+          gap: 22px;
+          margin-bottom: 23px;
+        }
+
+        .hero .bio p {
+          font-size: 17px;
+        }
+
+        .profiles {
+          gap: 8px;
+          margin-bottom: 27px;
+        }
+
+        .profiles a {
+          font-size: 13px;
+          min-height: 42px;
+        }
+
+        .two-col, .affiliations {
+          grid-template-columns: 1fr;
+          gap: 27px;
+        }
+
+        .two-col p, .two-col li {
+          font-size: 16px;
+        }
+
+        .section {
+          padding: 25px 0;
+        }
+
+        .contact {
+          padding: 20px;
+        }
+
+        .email {
+          font-size: 18px;
+        }
+
+        .footer {
+          font-size: 12px;
+        }
+
+        .portrait {
+          width: 220px;
+          margin-top: 18px;
+          height: 250px;
+        }
+
+        .hero .bio {
+          padding-top: 0;
+        }
+
+        .funding-list {
+          grid-template-columns: 1fr;
+        }
+
+        .funding-list li {
+          grid-template-columns: 72px minmax(0,1fr);
+        }
+
+        .two-col .teaching-history li {
+          font-size: 16px;
+        }
+
+      }
+
+      @media (prefers-reduced-motion:reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+      }
+
+      @media print {
+        .profiles, .flourish {
+          display: none;
+        }
+
+        .page {
+          padding: 0;
+          max-width: none;
+        }
+
+        body {
+          background: white;
+          font-size: 12pt;
+        }
+
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="page home">
+        <section class="hero" aria-labelledby="home-title">
+          <div>
+            <p class="eyebrow">Mathematics &amp; problem solving</p>
+            <h1 id="home-title">Ivan Guo</h1>
+            <p class="role">Associate Professor<br>School of Mathematics<br>Monash University</p>
+            <img class="portrait" src="https://raw.githubusercontent.com/ivanguogit/website/refs/heads/main/IvanOutside.png" alt="Ivan Guo">
+          </div>
+          <div class="bio">
+            <svg class="flourish" viewBox="0 0 110 110" fill="none" aria-hidden="true">
+              <circle cx="75" cy="26" r="11" fill="#d9c3df"></circle>
+              <path d="M16 79C-5 55 82 10 89 39C97 73 7 103 18 66C25 43 102 39 97 68" stroke="#a6482e" stroke-width="1.7"></path>
+              <circle cx="31" cy="18" r="4" fill="#628c78"></circle>
+            </svg>
+            <p>I am the Director of the <a href="https://www.monash.edu/science/quantitative-finance" target="_blank" rel="noopener noreferrer">Monash Centre for Quantitative Finance and Investment Strategies (CQFIS)</a>.</p>
+            <p>My research focuses on <strong>optimal transport, stochastic control</strong> and <strong>mathematical finance</strong>, with applications in model calibration, robust finance and stochastic games. I enjoy discovering unexpected connections between different areas of mathematics and exploring the new applications they open up.</p>
+            <p>I enjoy mathematical problem solving and take an active role in <strong>Olympiad mathematics</strong> through contest organisation, problem setting and student mentoring.</p>
+            <div class="profiles" aria-label="Academic profiles and CV">
+              <a href="https://scholar.google.com/citations?hl=en&amp;user=IPDgZisAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a>
+              <a href="https://orcid.org/0000-0002-6483-6654" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+              <a href="https://research.monash.edu/en/persons/ivan-guo/" target="_blank" rel="noopener noreferrer">Monash profile ↗</a>
+              <a href="https://raw.githubusercontent.com/ivanguogit/website/refs/heads/main/IvanGuo05112026.pdf" target="_blank" rel="noopener noreferrer">
+  CV (PDF) ↗
+</a>
+              <a href="mailto:ivan.guo@monash.edu" target="_blank" rel="noopener noreferrer">Email me ↗</a>
+            </div>
+          </div>
+        </section>
+        <section class="section two-col" aria-labelledby="home-research-title">
+          <div>
+            <h2 id="home-research-title">Research</h2>
+            <p>My research combines probability, optimal transport, convex duality and stochastic control, with applications in mathematical finance. Particular interests include (semi)martingale optimal transport and how constraints on distributions shape stochastic dynamics and the geometry of optimal solutions. I am also interested in how information unfolds over time, how it shapes decisions, and how the actions of interacting agents influence one another.</p>
+            <p>More broadly, I enjoy problems with simple formulations and rich mathematical structure, especially when abstract mathematical objects have concrete probabilistic or physical interpretations. These connections guide both the questions I ask and the methods I use. My work in finance spans volatility modelling and calibration, robust pricing and hedging, portfolio optimisation, market making and stochastic games.</p>
+            <ul class="tags" aria-label="Research interests">
+              <li>Optimal transport</li>
+              <li>Stochastic control</li>
+              <li>Financial mathematics</li>
+              <li>Model calibration</li>
+              <li>Robust finance</li>
+              <li>Stochastic games</li>
+            </ul>
+          </div>
+          <div>
+            <h2>Teaching</h2>
+            <p>I currently teach <strong>Markov Chains and Random Walks</strong> (MTH5230) and <strong>Financial Mathematics</strong> (MTH3251 / MTH4251).</p>
+            <h3 class="teaching-history-title">Previously taught</h3>
+            <ul class="teaching-history">
+              <li>
+                <strong>Monash:</strong> Statistical Learning in Finance (2016–2017); Quantitative risk management (2016).</li>
+              <li>
+                <strong>University of Sydney:</strong> Advanced Option Pricing (2015); Optimization and Financial Mathematics (2012); Linear Mathematics and Vector Calculus, Summer School (2012–2014).</li>
+              <li>
+                <strong>AMSI Summer School:</strong> Machine Learning in Financial Mathematics (2022); Statistical Machine Learning (2018).</li>
+              <li>
+                <strong>SPARC / IIT Ropar:</strong> Introduction to Stochastic Calculus and Financial Mathematics (2021).</li>
+            </ul>
+          </div>
+        </section>
+        <section class="section" aria-labelledby="affiliations-title">
+          <h2 id="affiliations-title">At Monash</h2>
+          <div class="affiliations">
+            <article class="affiliation">
+              <h3>
+                <a href="https://www.monash.edu/science/quantitative-finance" target="_blank" rel="noopener noreferrer">Quantitative finance</a>
+              </h3>
+              <p>Director, Centre for Quantitative Finance and Investment Strategies</p>
+            </article>
+            <article class="affiliation">
+              <h3>
+                <a href="https://www.monash.edu/science/climate-change-hub" target="_blank" rel="noopener noreferrer">Climate change science</a>
+              </h3>
+              <p>Node Leader, Climate Change Science Hub</p>
+            </article>
+          </div>
+        </section>
+        <section class="section" aria-labelledby="funding-title">
+          <h2 id="funding-title">Grants &amp; research support</h2>
+          <ul class="funding-list">
+            <li>
+              <span class="funding-year">2022</span>
+              <div>
+                <h3>ARC Discovery Project · DP220103106</h3>
+                <p>Can green investors drive the transition to a low emissions economy?</p>
+              </div>
+            </li>
+            <li>
+              <span class="funding-year">2017</span>
+              <div>
+                <h3>ARC Discovery Project · DP170101227</h3>
+                <p>The role of liquidity in financial markets</p>
+              </div>
+            </li>
+            <li>
+              <span class="funding-year">2022–2024</span>
+              <div>
+                <h3>Australian Renewable Energy Agency</h3>
+                <p>Integrating energy storage into the NEM: bidding, clearing, settlement, dispatch and ancillary markets</p>
+              </div>
+            </li>
+            <li>
+              <span class="funding-year">2020–2022</span>
+              <div>
+                <h3>RiskLab Projects — Mathematical Sciences</h3>
+                <p>Collaborative mathematical sciences research</p>
+              </div>
+            </li>
+            <li>
+              <span class="funding-year">2019–2021</span>
+              <div>
+                <h3>Government of India · SPARC</h3>
+                <p>Development of efficient computational techniques for convection-diffusion-reaction type problems in econophysics</p>
+              </div>
+            </li>
+            <li>
+              <span class="funding-year">2022</span>
+              <div>
+                <h3>Sydney Mathematical Research Institute</h3>
+                <p>Domestic Visitor Program</p>
+              </div>
+            </li>
+            <li>
+              <span class="funding-year">2017–2022</span>
+              <div>
+                <h3>CQFIS partnership with BNP Paribas</h3>
+                <p>Collaborative research partnership</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <section class="section two-col" aria-labelledby="background-title">
+          <div>
+            <h2 id="background-title">Education &amp; experience</h2>
+            <p>
+              <strong>PhD in Mathematics</strong>, University of Sydney, 2014.<br>
+    Thesis: <em>Competitive multi-player stochastic games with
+    applications to multi-person financial contracts</em>.<br>
+    Supervisor: Professor Marek Rutkowski.
+  </p>
+            <p>
+              <strong>BSc (Advanced Mathematics)</strong>, University of Sydney,
+    2008, with First Class Honours and the University Medal.
+  </p>
+            <p>
+  I also worked in Market Risk Quantitative Support at National
+  Australia Bank (NAB), as an intern and casual employee
+  from 2006 to 2012.
+</p>
+            <p>
+    Before joining Monash, I was an Associate Research Fellow at the
+    University of Wollongong from 2014 to 2016.
+  </p>
+            <p>
+  I was the Course Director of Monash’s
+  <a href="https://www.monash.edu/study/courses/find-a-course/financial-mathematics-s6001" target="_blank" rel="noopener noreferrer">Master of Financial Mathematics</a>
+  program (2020–2025).
+</p>
+          </div>
+          <div class="contact">
+            <h2>Get in touch</h2>
+            <p>
+              <a href="mailto:ivan.guo@monash.edu" target="_blank" rel="noopener noreferrer" class="email">ivan.guo@monash.edu</a>
+            </p>
+            <p>
+              <strong>Office</strong>
+              <br>
+  Room 353, 9 Rainforest Walk<br>
+  Monash University, Clayton campus
+</p>
+            <p>
+              <strong>Mailing address</strong>
+              <br>
+  School of Mathematics<br>
+  Monash University<br>
+  9 Rainforest Walk<br>
+  Victoria 3800, Australia
+</p>
+          </div>
+        </section>
+        <footer class="footer">
+          <span>Ivan Guo · Mathematics</span>
+          <span>
+            <a href="mailto:ivan.guo@monash.edu" target="_blank" rel="noopener noreferrer">ivan.guo@monash.edu</a>
+          </span>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>
