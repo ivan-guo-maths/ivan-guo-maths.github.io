@@ -1123,3 +1123,36 @@ section[id], h1[id], div[id] {
   top: 0;
   z-index: 1000;
 }
+.site-nav {
+  padding: 6px 36px;
+}
+
+.site-brand {
+  font-size: 21px;
+}
+
+.site-menu a {
+  font-size: 16px;
+}
+
+.nav-toggle {
+  font-size: 16px;
+}
+
+@media (max-width: 900px) {
+  .site-nav {
+    padding: 6px 28px;
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    padding-top: 57px;
+  }
+}
+
+@media (max-width: 620px) {
+  .site-nav {
+    padding: 6px 20px;
+  }
+}
