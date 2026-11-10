@@ -1109,7 +1109,7 @@ section[id], h1[id], div[id] {
 
 .site-nav {
   max-width: 1160px;
-  min-height: 50px;
+  min-height: 60px;
   margin: auto;
   padding: 0 36px;
   display: flex;
@@ -1139,7 +1139,7 @@ section[id], h1[id], div[id] {
 .site-menu a {
   display: flex;
   align-items: center;
-  min-height: 50px;
+  min-height: 60px;
   color: var(--ink);
   font-size: 16px;
   line-height: 1.25;
@@ -1154,16 +1154,32 @@ section[id], h1[id], div[id] {
 }
 
 .nav-toggle {
-  min-height: 36px;
-  padding: 4px 12px;
+  min-height: 38px;
+  min-width: 42px;
+  padding: 4px 10px;
   border: 1px solid var(--line);
   border-radius: 4px;
   background: transparent;
   color: var(--ink);
-  font: inherit;
-  font-size: 16px;
-  line-height: 1.25;
+  font-size: 20px; /* Scales the hamburger icon */
+  line-height: 1;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Turns the button text into a hamburger icon on mobile */
+.nav-toggle {
+  font-size: 0; /* Hides any text like "Menu" */
+}
+.nav-toggle::before {
+  content: "☰"; /* Hamburger symbol */
+  font-size: 22px;
+}
+.nav-toggle[aria-expanded="true"]::before {
+  content: "✕"; /* Changes to an X when open */
+  font-size: 20px;
 }
 
 .nav-toggle[hidden] {
@@ -1191,13 +1207,13 @@ section[id], h1[id], div[id] {
   }
 
   body {
-    padding-top: 45px;
+    padding-top: 55px; /* Matches the new larger header height */
   }
 
   .site-nav {
     flex-wrap: wrap;
     gap: 0 12px;
-    padding-block: 4px;
+    padding-block: 8px;
   }
 
   .site-menu {
@@ -1205,10 +1221,14 @@ section[id], h1[id], div[id] {
     flex-direction: column;
     align-items: stretch;
     gap: 0;
+    padding-bottom: 12px;
   }
 
+  /* Fixed mobile padding/height jump for open menu links */
   .site-menu a {
-    padding: 0;
+    min-height: 44px;
+    padding: 8px 0;
+    border-top: 1px solid var(--line);
   }
 
   .site-nav.nav-ready .site-menu {
