@@ -1109,7 +1109,7 @@ section[id], h1[id], div[id] {
 
 .site-nav {
   max-width: 1160px;
-  min-height: 44px;
+  min-height: 50px;
   margin: auto;
   padding: 0 36px;
   display: flex;
@@ -1139,7 +1139,7 @@ section[id], h1[id], div[id] {
 .site-menu a {
   display: flex;
   align-items: center;
-  min-height: 44px;
+  min-height: 50px;
   color: var(--ink);
   font-size: 16px;
   line-height: 1.25;
@@ -1191,7 +1191,7 @@ section[id], h1[id], div[id] {
   }
 
   body {
-    padding-top: 50px;
+    padding-top: 45px;
   }
 
   .site-nav {
